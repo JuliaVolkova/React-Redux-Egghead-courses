@@ -11,11 +11,12 @@
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
 <script type="text/babel">
     const rootElement = document.getElementById('root');
-    const props = {
-        className: 'container',
-        children: 'HELLO'
-    };
-    const element= <div {...props}>Hi there</div>;
+
+    const element = (
+        <div className="container">
+            <div>Hey!</div>
+        </div>
+    );
 
     ReactDOM.render(element, rootElement);
 
