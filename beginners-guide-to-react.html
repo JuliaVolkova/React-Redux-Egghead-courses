@@ -12,19 +12,30 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-    const Message = (props) => <div>{props.msg}</div>;
+    function SayHello(props) {
+        return (
+            <div>
+                Hello {props.firstName} {props.lastName || 'Unknown'}
+            </div>
+        )
+    }
 
-    const element = (
-        <div className="container">
-            <Message msg="HELLO WORLD!"/>
-        </div>
-    );
 
-    // OR:
-    //     const Message = (props) => <div>{props.children}</div>;
-    //     const element = (<Message>And hello again!</Message>);
+    const propTypes = {
+        string(props, propName, componentName) {
+            if (typeof props[propName] !== 'string') {
+                return new Error(`You should pass a string for a ${propName} but you pass in ${componentName}` +
+                    ` but you passed a ${typeof props[propName]}`)
+            }
+        }
+    };
 
-    ReactDOM.render(element, rootElement);
+    SayHello.propTypes = {
+        firstName: propTypes.string,
+        lastName: propTypes.string
+    };
+
+    ReactDOM.render(<SayHello firstName={'Mick'} lastName={'Jagger'}/>, rootElement);
 
 </script>
 </body>
