@@ -12,15 +12,6 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-    function SayHello(props) {
-        return (
-            <div>
-                Hello {props.firstName} {props.lastName || 'Unknown'}
-            </div>
-        )
-    }
-
-
     const propTypes = {
         string(props, propName, componentName) {
             if (typeof props[propName] !== 'string') {
@@ -30,10 +21,21 @@
         }
     };
 
-    SayHello.propTypes = {
-        firstName: propTypes.string,
-        lastName: propTypes.string
-    };
+    class SayHello extends React.Component{
+        static propTypes = {
+            firstName: propTypes.string,
+            lastName: propTypes.string
+        };
+
+        render(){
+            const {firstName, lastName} = this.props;
+            return(
+                <div>
+                    HELLO {firstName} {lastName}
+                </div>
+            )
+        }
+    }
 
     ReactDOM.render(<SayHello firstName={'Mick'} lastName={'Jagger'}/>, rootElement);
 
