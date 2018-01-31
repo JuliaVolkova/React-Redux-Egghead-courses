@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beginners guide to React</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+
+    class Tilt extends React.Component {
+        render(){
+            return (
+                <div style={{backgroundColor: 'green', width: '500px', height: '500px', margin: 'auto'}}
+                     ref={node => (this.node = node)}
+                >
+                    <div style={{backgroundColor: 'blue', width: '300px', height: '300px', margin: 'auto'}}>
+                        <div style={{backgroundColor: 'yellow', width: '100px', height: '100px', margin: 'auto'}}/>
+                    </div>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(<Tilt/>, rootElement)
+
+</script>
+
+</body>
+</html>
