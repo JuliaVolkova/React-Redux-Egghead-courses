@@ -12,12 +12,20 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
+    const props = {
+        className: 'box-small',
+        style: {
+            display: 'block',
+            width: '200px',
+            margin: 'auto',
+            color: 'green',
+            fontSize: '72px'
+        }
+    };
+
     const element = (
         <div>
-            <div
-                className="box box-small"
-                style={{paddingLeft: '100px', color: 'lightgreen'}}
-            >
+            <div {...props}>
                 box
             </div>
         </div>
