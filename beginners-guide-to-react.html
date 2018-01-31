@@ -12,22 +12,18 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-    function tick() {
-        const time = new Date().toLocaleTimeString();
-        const element = (
-            <div>
-                It's
-                <input value={time} />
-                <input value={time} />
+    const element = (
+        <div>
+            <div
+                className="box box-small"
+                style={{paddingLeft: '100px', color: 'lightgreen'}}
+            >
+                box
             </div>
-        );
+        </div>
+    );
 
-        ReactDOM.render(element, rootElement);
-    }
-
-    //React re-render only thing we need to update, keep focus
-    tick();
-    setInterval(tick, 1000);
+    ReactDOM.render(element, rootElement);
 
 </script>
 </body>
