@@ -12,35 +12,51 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-    const state = {
-        eventCount: 0,
-        userName: ''
-    };
+    class StopWatch extends React.Component {
+        state = {
+            running: false,
+            lapse: 0
+        };
 
-    function setState(newState) {
-        Object.assign(state, newState);
-        renderApp();
+        handleRunClick = () => {
+
+            this.setState(state => {
+                if (state.running) {
+                    clearInterval(this.timer)
+                } else {
+                    const startTime = Date.now() - this.state.lapse;
+                    this.timer = setInterval(() => {
+                        this.setState({
+                            lapse: Date.now() - startTime
+                        })
+                    })
+                }
+                return {running: !state.running}
+            });
+        };
+
+        handleClearClick = () => {
+            this.setState({
+                lapse: 0,
+                running: false
+            })
+        };
+
+        render() {
+            const {lapse, running} = this.state;
+            return (
+                <div>
+                    <label>{lapse}ms</label>
+                    <button onClick={this.handleRunClick}>{running ? 'Stop' : 'Start'}</button>
+                    <button onClick={this.handleClearClick}>Clear</button>
+                </div>
+            )
+        }
     }
 
-    function App() {
-        return (
-            <div>
-                <p>There have been {state.eventCount} events</p>
-                <button onClick={() => setState({
-                    eventCount: state.eventCount + 1
-                })}>
-                    close
-                </button>
-                <p>You typed: {state.userName}</p>
-                <input onChange={(event) => setState({userName: event.target.value})} />
-            </div>
-        )
-    }
+    const element = <StopWatch running={true} lapse={100}/>;
 
-    function renderApp() {
-        ReactDOM.render(<App/>, rootElement);
-    }
-    renderApp();
+    ReactDOM.render(element, rootElement);
 
 </script>
 </body>
