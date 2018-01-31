@@ -12,56 +12,33 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-    class StopWatch extends React.Component {
-        state = {
-            running: false,
-            lapse: 0
-        };
-
-        handleRunClick = () => {
-
-            this.setState(state => {
-                if (state.running) {
-                    clearInterval(this.timer)
-                } else {
-                    const startTime = Date.now() - this.state.lapse;
-                    this.timer = setInterval(() => {
-                        this.setState({
-                            lapse: Date.now() - startTime
-                        }, () => {console.log(this.state.lapse)})
-                    })
-                }
-                return {running: !state.running}
-            });
-        };
-
-        handleClearClick = () => {
-            clearInterval(this.timer);
-            this.setState({
-                lapse: 0,
-                running: false
-            })
-        };
-
-        componentWillUnmount(){
-            clearInterval(this.timer);
+    class Counter extends React.Component {
+        constructor(...args) {
+            super(...args);
+            this.state = {
+                count: 0
+            }
         }
 
+        handleClick = () => {
+            this.setState(({count}) => ({
+                    count: count + 1
+                })
+            );
+        };
+
         render() {
-            const {lapse, running} = this.state;
             return (
-                <div>
-                    <label>{lapse}ms</label>
-                    <button onClick={this.handleRunClick}>{running ? 'Stop' : 'Start'}</button>
-                    <button onClick={this.handleClearClick}>Clear</button>
-                </div>
+                <button onClick={this.handleClick.bind(this)}>
+                    {this.state.count}
+                </button>
             )
         }
     }
 
-    const element = <StopWatch running={true} lapse={100}/>;
 
-    ReactDOM.render(element, rootElement);
+
+    ReactDOM.render(<Counter/>, rootElement);
 
 </script>
 </body>
