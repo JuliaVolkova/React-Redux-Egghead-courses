@@ -12,18 +12,10 @@
 <script type="text/babel">
     const rootElement = document.getElementById('root');
 
-function Message({message}){
-    return (
-        <div>
-            {message
-                ? <div>{message}</div>
-                : <div>No message</div>
-            }
-        </div>
-    )
-}
+    const time = new Date().toLocaleTimeString();
+    const element = <div>It's {time}</div>;
 
-    ReactDOM.render(<Message message='Hello World!' />, rootElement);
+        ReactDOM.render(element, rootElement);
 
 </script>
 </body>
